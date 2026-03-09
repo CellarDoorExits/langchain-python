@@ -38,8 +38,8 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://cellar-door.dev"
-Repository = "https://github.com/CellarDoorExits/cellar-door-langchain-python"
-Issues = "https://github.com/CellarDoorExits/cellar-door-langchain-python/issues"
+Repository = "https://github.com/CellarDoorExits/langchain-python"
+Issues = "https://github.com/CellarDoorExits/langchain-python/issues"
 
 [project.optional-dependencies]
 dev = [

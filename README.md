@@ -60,8 +60,8 @@ Each marker is a cryptographically signed departure record with a content-addres
 
 | Package | Description |
 |---------|-------------|
-| [cellar-door-exit](https://github.com/CellarDoorExits/cellar-door-exit-python) (Python) | Core protocol -- departure markers |
-| **[cellar-door-langchain](https://github.com/CellarDoorExits/cellar-door-langchain-python) (Python)** | **← you are here** |
+| [cellar-door-exit](https://github.com/CellarDoorExits/exit-python) (Python) | Core protocol -- departure markers |
+| **[cellar-door-langchain](https://github.com/CellarDoorExits/langchain-python) (Python)** | **← you are here** |
 | [cellar-door-exit](https://github.com/CellarDoorExits/exit-door) (TypeScript) | Core protocol (reference implementation) |
 | [@cellar-door/langchain](https://github.com/CellarDoorExits/langchain) (TypeScript) | LangChain integration (TypeScript) |
 
