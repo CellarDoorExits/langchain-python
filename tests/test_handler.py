@@ -13,7 +13,7 @@ class TestExitCallbackHandler:
         handler = ExitCallbackHandler()
         assert handler.origin == "langchain"
         assert handler.exit_type == ExitType.VOLUNTARY
-        assert handler.markers == []
+        assert len(handler.markers) == 0
         assert handler.max_markers == 1000
 
     def test_custom_origin(self) -> None:
@@ -49,6 +49,24 @@ class TestExitCallbackHandler:
         # Oldest should have been evicted
         ids = [m.id for m in handler.markers]
         assert len(set(ids)) == 3  # All unique
+
+    def test_root_only_skips_subchains(self) -> None:
+        handler = ExitCallbackHandler(root_only=True)
+        # Simulate: root chain > subchain > subchain end > root chain end
+        handler.on_chain_start(serialized={}, inputs={})
+        handler.on_chain_start(serialized={}, inputs={})  # nested
+        handler.on_chain_end(outputs={})  # nested end — should NOT create marker
+        assert len(handler.markers) == 0
+        handler.on_chain_end(outputs={})  # root end — SHOULD create marker
+        assert len(handler.markers) == 1
+
+    def test_root_only_false_fires_on_all(self) -> None:
+        handler = ExitCallbackHandler(root_only=False)
+        handler.on_chain_start(serialized={}, inputs={})
+        handler.on_chain_start(serialized={}, inputs={})
+        handler.on_chain_end(outputs={})
+        handler.on_chain_end(outputs={})
+        assert len(handler.markers) == 2
 
     def test_on_marker_callback(self) -> None:
         received: list[ExitMarker] = []
